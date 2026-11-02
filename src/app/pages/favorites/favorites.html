@@ -1,0 +1,15 @@
+<h1>Le tue ricette preferite</h1>
+<p class="page-intro">Qui trovi le ricette che hai salvato. I preferiti restano memorizzati nel tuo browser.</p>
+
+@if (recipeService.favorites().length > 0) {
+  <div class="recipe-grid">
+    @for (recipe of recipeService.favorites(); track recipe.id) {
+      <app-recipe-card [recipe]="recipe" />
+    }
+  </div>
+} @else {
+  <div class="empty-state">
+    <p>Non hai ancora salvato nessuna ricetta. Esplora il catalogo e tocca il cuore per aggiungerla.</p>
+    <a class="button" routerLink="/ricette">Vai alle ricette</a>
+  </div>
+}

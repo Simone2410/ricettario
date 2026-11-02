@@ -1,0 +1,27 @@
+<article class="card">
+  <a class="card-link" [routerLink]="['/ricette', recipe().id]">
+    <div class="card-image" [style.background]="recipe().color">
+      <span class="card-emoji">{{ recipe().emoji }}</span>
+    </div>
+    <div class="card-body">
+      <span class="badge">{{ categoryLabels[recipe().category] }}</span>
+      <h3>{{ recipe().title }}</h3>
+      <p class="description">{{ recipe().description }}</p>
+      <ul class="meta">
+        <li>{{ recipe().minutes }} min</li>
+        <li>{{ recipe().servings }} porzioni</li>
+        <li>{{ difficultyLabels[recipe().difficulty] }}</li>
+      </ul>
+    </div>
+  </a>
+  <button
+    type="button"
+    class="favorite"
+    [class.active]="isFavorite()"
+    [attr.aria-pressed]="isFavorite()"
+    [attr.aria-label]="isFavorite() ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti'"
+    (click)="toggleFavorite()"
+  >
+    {{ isFavorite() ? '♥' : '♡' }}
+  </button>
+</article>

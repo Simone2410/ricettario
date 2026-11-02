@@ -1,0 +1,139 @@
+:root {
+  --color-bg: #fff8f0;
+  --color-surface: #ffffff;
+  --color-text: #2b2420;
+  --color-muted: #6f635a;
+  --color-primary: #c2410c;
+  --color-primary-dark: #9a3412;
+  --color-border: #eadccf;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+.container {
+  width: 1140px;
+  margin: 0 auto;
+}
+
+.page-intro {
+  margin: 0 0 28px;
+  font-size: 19px;
+  color: var(--color-muted);
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+  background: #ffe8d6;
+  border-radius: 999px;
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  color: var(--color-muted);
+  list-style: none;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 340px);
+  gap: 30px;
+  justify-content: center;
+}
+
+.empty-state {
+  padding: 48px;
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: 12px;
+
+  p {
+    margin: 0 0 16px;
+    font-size: 18px;
+    color: var(--color-muted);
+  }
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 8px;
+
+  &:hover {
+    background: var(--color-primary-dark);
+  }
+
+  &.secondary {
+    color: var(--color-primary);
+    background: transparent;
+    border: 2px solid var(--color-primary);
+
+    &:hover {
+      color: #ffffff;
+      background: var(--color-primary);
+    }
+  }
+}
+
+.prose {
+  width: 760px;
+
+  p {
+    margin: 0 0 18px;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+}

@@ -1,0 +1,24 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" routerLink="/ricette">
+      <span class="brand-icon">🍝</span>
+      <span class="brand-name">Il Ricettario</span>
+    </a>
+    <nav class="main-nav" aria-label="Navigazione principale">
+      <a routerLink="/ricette" routerLinkActive="active">Ricette</a>
+      <a routerLink="/preferiti" routerLinkActive="active">Preferiti ({{ recipeService.favoritesCount() }})</a>
+      <a routerLink="/chi-siamo" routerLinkActive="active">Chi siamo</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container main-content">
+  <router-outlet />
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© {{ year }} Il Ricettario. Tutti i diritti riservati.</p>
+    <p>Ricette della tradizione italiana, spiegate passo dopo passo.</p>
+  </div>
+</footer>

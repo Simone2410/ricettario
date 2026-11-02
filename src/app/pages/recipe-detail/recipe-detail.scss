@@ -1,0 +1,84 @@
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  padding: 40px 48px;
+  margin-bottom: 40px;
+  border-radius: 18px;
+}
+
+.hero-emoji {
+  flex: none;
+  width: 220px;
+  font-size: 140px;
+  text-align: center;
+}
+
+.hero-description {
+  margin: 0 0 16px;
+  font-size: 19px;
+}
+
+.meta {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+.published {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 380px 700px;
+  gap: 60px;
+}
+
+.ingredients,
+.steps {
+  padding: 28px 32px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+.servings-note {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.ingredients ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+.steps ol {
+  padding-left: 24px;
+  margin: 0;
+
+  li {
+    margin-bottom: 16px;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+}

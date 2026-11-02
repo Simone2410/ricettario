@@ -1,0 +1,51 @@
+@if (recipe(); as r) {
+  <a class="back-link" routerLink="/ricette">← Torna alle ricette</a>
+
+  <section class="hero" [style.background]="r.color">
+    <span class="hero-emoji">{{ r.emoji }}</span>
+    <div class="hero-text">
+      <span class="badge">{{ categoryLabels[r.category] }}</span>
+      <h1>{{ r.title }}</h1>
+      <p class="hero-description">{{ r.description }}</p>
+      <ul class="meta">
+        <li>Tempo: {{ r.minutes }} min</li>
+        <li>Porzioni: {{ r.servings }}</li>
+        <li>Difficoltà: {{ difficultyLabels[r.difficulty] }}</li>
+      </ul>
+      <p class="published">Pubblicata il {{ r.publishedAt | date: 'd MMMM y' }}</p>
+      <button type="button" class="button" [class.secondary]="isFavorite()" (click)="toggleFavorite()">
+        {{ isFavorite() ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti' }}
+      </button>
+    </div>
+  </section>
+
+  <div class="columns">
+    <section class="ingredients">
+      <h2>Ingredienti</h2>
+      <p class="servings-note">Quantità per {{ r.servings }} persone</p>
+      <ul>
+        @for (ingredient of r.ingredients; track ingredient.name) {
+          <li>
+            <span>{{ ingredient.name }}</span>
+            <strong>{{ ingredient.quantity }}</strong>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="steps">
+      <h2>Preparazione</h2>
+      <ol>
+        @for (step of r.steps; track $index) {
+          <li>{{ step }}</li>
+        }
+      </ol>
+    </section>
+  </div>
+} @else {
+  <div class="empty-state">
+    <h1>Ricetta non trovata</h1>
+    <p>La ricetta che cerchi non esiste o è stata rimossa.</p>
+    <a class="button" routerLink="/ricette">Torna all’elenco</a>
+  </div>
+}

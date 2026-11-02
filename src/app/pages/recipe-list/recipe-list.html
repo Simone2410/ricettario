@@ -1,0 +1,46 @@
+<h1>Tutte le ricette</h1>
+<p class="page-intro">Cerca tra le ricette della tradizione italiana e salva le tue preferite.</p>
+
+<form class="filters" (submit)="$event.preventDefault()">
+  <input
+    type="search"
+    class="search"
+    placeholder="Cerca una ricetta o un ingrediente..."
+    aria-label="Cerca una ricetta"
+    [value]="query()"
+    (input)="onQueryInput($event)"
+  />
+
+  <select aria-label="Filtra per categoria" (change)="onCategoryChange($event)">
+    <option value="" [selected]="category() === ''">Tutte le categorie</option>
+    @for (item of categories; track item.value) {
+      <option [value]="item.value" [selected]="item.value === category()">{{ item.label }}</option>
+    }
+  </select>
+
+  <select aria-label="Filtra per difficoltà" (change)="onDifficultyChange($event)">
+    <option value="" [selected]="difficulty() === ''">Ogni difficoltà</option>
+    @for (item of difficulties; track item.value) {
+      <option [value]="item.value" [selected]="item.value === difficulty()">{{ item.label }}</option>
+    }
+  </select>
+
+  @if (hasFilters()) {
+    <button type="button" class="button secondary" (click)="resetFilters()">Azzera filtri</button>
+  }
+</form>
+
+<p class="results">{{ resultsLabel() }}</p>
+
+@if (filteredRecipes().length > 0) {
+  <div class="recipe-grid">
+    @for (recipe of filteredRecipes(); track recipe.id) {
+      <app-recipe-card [recipe]="recipe" />
+    }
+  </div>
+} @else {
+  <div class="empty-state">
+    <p>Nessuna ricetta corrisponde ai filtri selezionati.</p>
+    <button type="button" class="button" (click)="resetFilters()">Mostra tutte le ricette</button>
+  </div>
+}
