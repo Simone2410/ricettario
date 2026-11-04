@@ -6,6 +6,38 @@
   --color-primary: #c2410c;
   --color-primary-dark: #9a3412;
   --color-border: #eadccf;
+  --color-on-primary: #ffffff;
+  --color-badge-bg: #ffe8d6;
+  --color-badge-text: #9a3412;
+  --color-footer-bg: #2b2420;
+  --color-footer-text: #e9dfd5;
+}
+
+@mixin dark-variables {
+  --color-bg: #1c1713;
+  --color-surface: #2a221c;
+  --color-text: #f0e6dc;
+  --color-muted: #a89a8e;
+  --color-primary: #e8642a;
+  --color-primary-dark: #c2410c;
+  --color-border: #3d322a;
+  --color-on-primary: #ffffff;
+  --color-badge-bg: #3d2a1c;
+  --color-badge-text: #f0a878;
+  --color-footer-bg: #141010;
+  --color-footer-text: #d8cbc0;
+}
+
+/* Tema scuro scelto manualmente tramite il toggle. */
+:root.dark {
+  @include dark-variables;
+}
+
+/* Tema scuro automatico in base alle impostazioni di sistema. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    @include dark-variables;
+  }
 }
 
 * {
@@ -91,8 +123,8 @@ a {
   font-weight: 700;
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  color: var(--color-primary-dark);
-  background: #ffe8d6;
+  color: var(--color-badge-text);
+  background: var(--color-badge-bg);
   border-radius: 999px;
 }
 
@@ -153,7 +185,7 @@ a {
   font-family: inherit;
   font-size: 16px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--color-on-primary);
   text-decoration: none;
   cursor: pointer;
   background: var(--color-primary);

@@ -22,6 +22,18 @@
         </button>
       }
     </div>
+    <button
+      type="button"
+      class="theme-toggle"
+      [attr.aria-label]="themeService.theme() === 'auto'
+        ? i18n.t().shell.themeAuto
+        : themeService.theme() === 'light'
+          ? i18n.t().shell.themeLight
+          : i18n.t().shell.themeDark"
+      (click)="themeService.cycleTheme()"
+    >
+      {{ themeIcon[themeService.theme()] }}
+    </button>
   </div>
 </header>
 

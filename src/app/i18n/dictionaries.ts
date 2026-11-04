@@ -9,6 +9,10 @@ export interface Dictionary {
     navAbout: string;
     copyright: string;
     tagline: string;
+    themeGroupAria: string;
+    themeAuto: string;
+    themeLight: string;
+    themeDark: string;
   };
   labels: {
     categories: Record<'antipasti' | 'primi' | 'secondi' | 'dolci', string>;
@@ -78,6 +82,10 @@ export const it: Dictionary = {
     navAbout: 'Chi siamo',
     copyright: 'Il Ricettario. Tutti i diritti riservati.',
     tagline: 'Ricette della tradizione italiana, spiegate passo dopo passo.',
+    themeGroupAria: 'Scelta del tema',
+    themeAuto: 'Tema automatico: segue le impostazioni di sistema',
+    themeLight: 'Tema chiaro',
+    themeDark: 'Tema scuro',
   },
   labels: {
     categories: {
@@ -156,6 +164,10 @@ export const en: Dictionary = {
     navAbout: 'About us',
     copyright: 'The Recipe Book. All rights reserved.',
     tagline: 'Recipes of the Italian tradition, explained step by step.',
+    themeGroupAria: 'Theme selection',
+    themeAuto: 'Automatic theme: follows system settings',
+    themeLight: 'Light theme',
+    themeDark: 'Dark theme',
   },
   labels: {
     categories: {

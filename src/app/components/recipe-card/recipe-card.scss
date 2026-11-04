@@ -55,12 +55,13 @@
   line-height: 1;
   color: var(--color-primary);
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.92);
-  border: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 50%;
 
   &.active {
-    color: #ffffff;
+    color: var(--color-on-primary);
     background: var(--color-primary);
+    border-color: var(--color-primary);
   }
 }

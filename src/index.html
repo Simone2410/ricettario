@@ -7,6 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Ricette della tradizione italiana, spiegate passo dopo passo.">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    // Anti-flash: applica il tema salvato prima del bootstrap di Angular.
+    (function () {
+      try {
+        var theme = localStorage.getItem('ricettario-theme');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else if (theme === 'light') {
+          document.documentElement.classList.add('light');
+        }
+      } catch (e) { /* localStorage non disponibile: resta il tema di sistema */ }
+    })();
+  </script>
 </head>
 <body>
   <app-root></app-root>
