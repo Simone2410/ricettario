@@ -56,6 +56,21 @@
       border-bottom-color: var(--color-primary);
     }
   }
+
+  .nav-add {
+    color: var(--color-on-primary);
+    background: var(--color-primary);
+    border-radius: 999px;
+    padding: 6px 14px !important;
+    border-bottom: none !important;
+
+    &:hover,
+    &.active {
+      color: var(--color-on-primary);
+      background: var(--color-primary-dark);
+      border-bottom: none;
+    }
+  }
 }
 
 @media (min-width: 640px) {

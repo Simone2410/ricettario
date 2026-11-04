@@ -8,6 +8,7 @@
       <a routerLink="/ricette" routerLinkActive="active">{{ i18n.t().shell.navRecipes }}</a>
       <a routerLink="/preferiti" routerLinkActive="active">{{ i18n.t().shell.navFavorites }} ({{ recipeService.favoritesCount() }})</a>
       <a routerLink="/chi-siamo" routerLinkActive="active">{{ i18n.t().shell.navAbout }}</a>
+      <a class="nav-add" routerLink="/nuova-ricetta" routerLinkActive="active">{{ i18n.t().shell.navAddRecipe }}</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language / Lingua">
       @for (lang of languages; track lang.value) {

@@ -1,0 +1,143 @@
+<h1>{{ i18n.t().recipeForm.title }}</h1>
+<p class="page-intro">{{ i18n.t().recipeForm.intro }}</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="recipe-form">
+  <div class="form-grid">
+    <div class="field">
+      <label for="title">{{ i18n.t().recipeForm.titleLabel }}</label>
+      <input id="title" type="text" formControlName="title" [placeholder]="i18n.t().recipeForm.titlePlaceholder" />
+      @if (hasError('title')) {
+        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="description">{{ i18n.t().recipeForm.descriptionLabel }}</label>
+      <input id="description" type="text" formControlName="description" [placeholder]="i18n.t().recipeForm.descriptionPlaceholder" />
+      @if (hasError('description')) {
+        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="category">{{ i18n.t().recipeForm.categoryLabel }}</label>
+      <select id="category" formControlName="category">
+        <option value="" disabled>{{ i18n.t().recipeForm.categoryPlaceholder }}</option>
+        @for (item of categories; track item.value) {
+          <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+      @if (hasError('category')) {
+        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="difficulty">{{ i18n.t().recipeForm.difficultyLabel }}</label>
+      <select id="difficulty" formControlName="difficulty">
+        <option value="" disabled>{{ i18n.t().recipeForm.difficultyLabel }}</option>
+        @for (item of difficulties; track item.value) {
+          <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+      @if (hasError('difficulty')) {
+        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="minutes">{{ i18n.t().recipeForm.minutesLabel }}</label>
+      <input id="minutes" type="number" formControlName="minutes" min="1" max="600" />
+      @if (hasError('minutes')) {
+        <p class="error">{{ i18n.t().recipeForm.minOne }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="servings">{{ i18n.t().recipeForm.servingsLabel }}</label>
+      <input id="servings" type="number" formControlName="servings" min="1" max="20" />
+      @if (hasError('servings')) {
+        <p class="error">{{ i18n.t().recipeForm.minOne }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="emoji">{{ i18n.t().recipeForm.emojiLabel }}</label>
+      <input id="emoji" type="text" formControlName="emoji" [placeholder]="i18n.t().recipeForm.emojiPlaceholder" maxlength="4" />
+    </div>
+
+    <div class="field">
+      <label for="color">{{ i18n.t().recipeForm.colorLabel }}</label>
+      <input id="color" type="color" formControlName="color" />
+    </div>
+
+    <div class="field">
+      <label for="publishedAt">{{ i18n.t().recipeForm.dateLabel }}</label>
+      <input id="publishedAt" type="date" formControlName="publishedAt" />
+      @if (hasError('publishedAt')) {
+        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+      }
+    </div>
+  </div>
+
+  <section class="form-section" formArrayName="ingredients">
+    <h2>{{ i18n.t().recipeForm.ingredientsTitle }}</h2>
+    @for (ingredient of ingredients.controls; track $index) {
+      <div class="ingredient-row" [formGroupName]="$index">
+        <input
+          type="text"
+          formControlName="name"
+          [placeholder]="i18n.t().recipeForm.ingredientNamePlaceholder"
+          [attr.aria-invalid]="ingredientError($index, 'name')"
+        />
+        <input
+          type="text"
+          formControlName="quantity"
+          [placeholder]="i18n.t().recipeForm.ingredientQuantityPlaceholder"
+          [attr.aria-invalid]="ingredientError($index, 'quantity')"
+        />
+        <button
+          type="button"
+          class="remove-button"
+          [disabled]="ingredients.length <= 1"
+          (click)="removeIngredient($index)"
+        >
+          ×
+        </button>
+      </div>
+    }
+    <button type="button" class="button secondary" (click)="addIngredient()">
+      {{ i18n.t().recipeForm.addIngredient }}
+    </button>
+  </section>
+
+  <section class="form-section" formArrayName="steps">
+    <h2>{{ i18n.t().recipeForm.stepsTitle }}</h2>
+    @for (step of steps.controls; track $index) {
+      <div class="step-row">
+        <textarea
+          rows="2"
+          [formControlName]="$index"
+          [placeholder]="i18n.t().recipeForm.stepPlaceholder"
+          [attr.aria-invalid]="stepError($index)"
+        ></textarea>
+        <button
+          type="button"
+          class="remove-button"
+          [disabled]="steps.length <= 1"
+          (click)="removeStep($index)"
+        >
+          ×
+        </button>
+      </div>
+    }
+    <button type="button" class="button secondary" (click)="addStep()">
+      {{ i18n.t().recipeForm.addStep }}
+    </button>
+  </section>
+
+  <div class="form-actions">
+    <a class="button secondary" routerLink="/ricette">{{ i18n.t().recipeForm.cancel }}</a>
+    <button type="submit" class="button">{{ i18n.t().recipeForm.submit }}</button>
+  </div>
+</form>

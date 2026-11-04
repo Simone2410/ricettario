@@ -1,12 +1,13 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
 import { RECIPES } from '../data/recipes';
-import { Recipe } from '../models/recipe';
+import { Category, Difficulty, Recipe } from '../models/recipe';
 
 const FAVORITES_KEY = 'ricettario.favorites';
+const RECIPES_KEY = 'ricettario.recipes';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeService {
-  private readonly allRecipes = signal<Recipe[]>(RECIPES);
+  private readonly allRecipes = signal<Recipe[]>([...RECIPES, ...this.loadUserRecipes()]);
   private readonly favoriteIds = signal<string[]>(this.loadFavorites());
 
   readonly recipes = this.allRecipes.asReadonly();
@@ -20,11 +21,19 @@ export class RecipeService {
   constructor() {
     effect(() => {
       this.saveFavorites(this.favoriteIds());
+      this.saveUserRecipes();
     });
   }
 
   getById(id: string | undefined): Recipe | undefined {
     return this.allRecipes().find((recipe) => recipe.id === id);
+  }
+
+  /** Aggiunge una ricetta creata dall'utente e restituisce l'id generato. */
+  addRecipe(recipe: Omit<Recipe, 'id'>): string {
+    const id = this.uniqueId(recipe.title);
+    this.allRecipes.update((recipes) => [...recipes, { ...recipe, id }]);
+    return id;
   }
 
   isFavorite(id: string): boolean {
@@ -35,6 +44,70 @@ export class RecipeService {
     this.favoriteIds.update((ids) =>
       ids.includes(id) ? ids.filter((current) => current !== id) : [...ids, id],
     );
+  }
+
+  /** Genera uno slug dal titolo, con suffisso progressivo se già esistente. */
+  private uniqueId(title: string): string {
+    const base =
+      title
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'ricetta';
+    let id = base;
+    let counter = 2;
+    while (this.allRecipes().some((recipe) => recipe.id === id)) {
+      id = `${base}-${counter}`;
+      counter++;
+    }
+    return id;
+  }
+
+  private isRecipe(value: unknown): value is Recipe {
+    if (typeof value !== 'object' || value === null) {
+      return false;
+    }
+    const recipe = value as Record<string, unknown>;
+    return (
+      typeof recipe['id'] === 'string' &&
+      typeof recipe['title'] === 'string' &&
+      typeof recipe['description'] === 'string' &&
+      typeof recipe['category'] === 'string' &&
+      typeof recipe['difficulty'] === 'string' &&
+      typeof recipe['minutes'] === 'number' &&
+      typeof recipe['servings'] === 'number' &&
+      typeof recipe['emoji'] === 'string' &&
+      typeof recipe['color'] === 'string' &&
+      typeof recipe['publishedAt'] === 'string' &&
+      Array.isArray(recipe['ingredients']) &&
+      Array.isArray(recipe['steps'])
+    );
+  }
+
+  private loadUserRecipes(): Recipe[] {
+    try {
+      const raw = localStorage.getItem(RECIPES_KEY);
+      const parsed: unknown = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(parsed)) {
+        return [];
+      }
+      return parsed.filter(this.isRecipe);
+    } catch {
+      return [];
+    }
+  }
+
+  private saveUserRecipes(): void {
+    // Salva solo le ricette aggiunte dall'utente, non quelle di esempio.
+    const userRecipes = this.allRecipes().filter(
+      (recipe) => !RECIPES.some((sample) => sample.id === recipe.id),
+    );
+    try {
+      localStorage.setItem(RECIPES_KEY, JSON.stringify(userRecipes));
+    } catch {
+      // Salvataggio non disponibile: le ricette restano solo in memoria.
+    }
   }
 
   private loadFavorites(): string[] {

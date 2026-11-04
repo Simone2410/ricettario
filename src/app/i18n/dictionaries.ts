@@ -7,6 +7,7 @@ export interface Dictionary {
     navRecipes: string;
     navFavorites: string;
     navAbout: string;
+    navAddRecipe: string;
     copyright: string;
     tagline: string;
     themeGroupAria: string;
@@ -51,6 +52,40 @@ export interface Dictionary {
     sortAsc: string;
     sortDesc: string;
   };
+  recipeForm: {
+    title: string;
+    titleLabel: string;
+    titlePlaceholder: string;
+    descriptionLabel: string;
+    descriptionPlaceholder: string;
+    categoryLabel: string;
+    categoryPlaceholder: string;
+    difficultyLabel: string;
+    minutesLabel: string;
+    servingsLabel: string;
+    emojiLabel: string;
+    emojiPlaceholder: string;
+    colorLabel: string;
+    dateLabel: string;
+    ingredientsTitle: string;
+    ingredientNamePlaceholder: string;
+    ingredientQuantityPlaceholder: string;
+    addIngredient: string;
+    stepsTitle: string;
+    stepPlaceholder: string;
+    addStep: string;
+    remove: string;
+    submit: string;
+    cancel: string;
+    required: string;
+    tooShort: string;
+    tooLong: string;
+    invalidNumber: string;
+    minOne: string;
+    atLeastOneIngredient: string;
+    atLeastOneStep: string;
+    intro: string;
+  };
   recipeDetail: {
     back: string;
     ingredients: string;
@@ -86,6 +121,7 @@ export const it: Dictionary = {
     navRecipes: 'Ricette',
     navFavorites: 'Preferiti',
     navAbout: 'Chi siamo',
+    navAddRecipe: '+ Nuova',
     copyright: 'Il Ricettario. Tutti i diritti riservati.',
     tagline: 'Ricette della tradizione italiana, spiegate passo dopo passo.',
     themeGroupAria: 'Scelta del tema',
@@ -139,6 +175,40 @@ export const it: Dictionary = {
     sortAsc: 'Ordine crescente',
     sortDesc: 'Ordine decrescente',
   },
+  recipeForm: {
+    title: 'Aggiungi una nuova ricetta',
+    titleLabel: 'Titolo',
+    titlePlaceholder: 'Es. Pasta alla Norma',
+    descriptionLabel: 'Descrizione',
+    descriptionPlaceholder: 'Una frase che descrive la ricetta...',
+    categoryLabel: 'Categoria',
+    categoryPlaceholder: 'Scegli una categoria',
+    difficultyLabel: 'Difficoltà',
+    minutesLabel: 'Tempo di preparazione (minuti)',
+    servingsLabel: 'Porzioni',
+    emojiLabel: 'Emoji',
+    emojiPlaceholder: '🍽️',
+    colorLabel: 'Colore',
+    dateLabel: 'Data di pubblicazione',
+    ingredientsTitle: 'Ingredienti',
+    ingredientNamePlaceholder: 'Es. Pomodori',
+    ingredientQuantityPlaceholder: 'Es. 400 g',
+    addIngredient: '+ Aggiungi ingrediente',
+    stepsTitle: 'Preparazione',
+    stepPlaceholder: 'Descrivi un passo della preparazione...',
+    addStep: '+ Aggiungi passo',
+    remove: 'Rimuovi',
+    submit: 'Salva ricetta',
+    cancel: 'Annulla',
+    required: 'Campo obbligatorio',
+    tooShort: 'Troppo corto',
+    tooLong: 'Troppo lungo',
+    invalidNumber: 'Inserisci un numero valido',
+    minOne: 'Il valore minimo è 1',
+    atLeastOneIngredient: 'Aggiungi almeno un ingrediente',
+    atLeastOneStep: 'Aggiungi almeno un passo',
+    intro: 'Compila i campi qui sotto: la ricetta verrà salvata nel tuo browser e comparirà nel catalogo.',
+  },
   recipeDetail: {
     back: '← Torna alle ricette',
     ingredients: 'Ingredienti',
@@ -174,6 +244,7 @@ export const en: Dictionary = {
     navRecipes: 'Recipes',
     navFavorites: 'Favorites',
     navAbout: 'About us',
+    navAddRecipe: '+ New',
     copyright: 'The Recipe Book. All rights reserved.',
     tagline: 'Recipes of the Italian tradition, explained step by step.',
     themeGroupAria: 'Theme selection',
@@ -226,6 +297,40 @@ export const en: Dictionary = {
     sortPublished: 'Publication date',
     sortAsc: 'Ascending order',
     sortDesc: 'Descending order',
+  },
+  recipeForm: {
+    title: 'Add a new recipe',
+    titleLabel: 'Title',
+    titlePlaceholder: 'E.g. Pasta alla Norma',
+    descriptionLabel: 'Description',
+    descriptionPlaceholder: 'A sentence describing the recipe...',
+    categoryLabel: 'Category',
+    categoryPlaceholder: 'Choose a category',
+    difficultyLabel: 'Difficulty',
+    minutesLabel: 'Preparation time (minutes)',
+    servingsLabel: 'Servings',
+    emojiLabel: 'Emoji',
+    emojiPlaceholder: '🍽️',
+    colorLabel: 'Color',
+    dateLabel: 'Publication date',
+    ingredientsTitle: 'Ingredients',
+    ingredientNamePlaceholder: 'E.g. Tomatoes',
+    ingredientQuantityPlaceholder: 'E.g. 400 g',
+    addIngredient: '+ Add ingredient',
+    stepsTitle: 'Preparation',
+    stepPlaceholder: 'Describe a preparation step...',
+    addStep: '+ Add step',
+    remove: 'Remove',
+    submit: 'Save recipe',
+    cancel: 'Cancel',
+    required: 'This field is required',
+    tooShort: 'Too short',
+    tooLong: 'Too long',
+    invalidNumber: 'Enter a valid number',
+    minOne: 'The minimum value is 1',
+    atLeastOneIngredient: 'Add at least one ingredient',
+    atLeastOneStep: 'Add at least one step',
+    intro: 'Fill in the fields below: the recipe will be saved in your browser and appear in the catalog.',
   },
   recipeDetail: {
     back: '← Back to recipes',
