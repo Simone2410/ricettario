@@ -2,15 +2,21 @@ export type Category = 'antipasti' | 'primi' | 'secondi' | 'dolci';
 
 export type Difficulty = 'facile' | 'media' | 'difficile';
 
+/** Testo disponibile in entrambe le lingue dell'app. */
+export interface LocalizedText {
+  it: string;
+  en: string;
+}
+
 export interface Ingredient {
-  name: string;
-  quantity: string;
+  name: LocalizedText;
+  quantity: LocalizedText;
 }
 
 export interface Recipe {
   id: string;
-  title: string;
-  description: string;
+  title: LocalizedText;
+  description: LocalizedText;
   category: Category;
   difficulty: Difficulty;
   minutes: number;
@@ -19,21 +25,8 @@ export interface Recipe {
   color: string;
   publishedAt: string;
   ingredients: Ingredient[];
-  steps: string[];
+  steps: LocalizedText[];
 }
-
-export const CATEGORY_LABELS: Record<Category, string> = {
-  antipasti: 'Antipasti',
-  primi: 'Primi piatti',
-  secondi: 'Secondi piatti',
-  dolci: 'Dolci',
-};
-
-export const DIFFICULTY_LABELS: Record<Difficulty, string> = {
-  facile: 'Facile',
-  media: 'Media',
-  difficile: 'Difficile',
-};
 
 /** Rango numerico per l'ordinamento: facile < media < difficile. */
 export const DIFFICULTY_RANK: Record<Difficulty, number> = {

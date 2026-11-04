@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Category, CATEGORY_LABELS, DIFFICULTY_LABELS, Difficulty, Recipe } from '../../models/recipe';
+import { Category, Difficulty, Recipe } from '../../models/recipe';
 import { I18nService } from '../../i18n/i18n.service';
 import { RecipeService } from '../../services/recipe.service';
 
@@ -27,12 +27,12 @@ export class RecipeForm {
 
   protected readonly submitted = signal(false);
 
-  protected readonly categories = Object.entries(CATEGORY_LABELS).map(([value, label]) => ({
+  protected readonly categories = Object.entries(this.i18n.t().labels.categories).map(([value, label]) => ({
     value: value as Category,
     label,
   }));
 
-  protected readonly difficulties = Object.entries(DIFFICULTY_LABELS).map(([value, label]) => ({
+  protected readonly difficulties = Object.entries(this.i18n.t().labels.difficulties).map(([value, label]) => ({
     value: value as Difficulty,
     label,
   }));
@@ -119,9 +119,13 @@ export class RecipeForm {
     }
 
     const value = this.form.getRawValue();
+    const lang = this.i18n.language();
+    // I testi inseriti dall'utente vengono salvati nella lingua corrente;
+    // l'altra lingua mostra lo stesso testo come fallback.
+    const localized = (text: string) => ({ it: text, en: text, [lang]: text.trim() });
     const recipe: Omit<Recipe, 'id'> = {
-      title: value.title.trim(),
-      description: value.description.trim(),
+      title: localized(value.title),
+      description: localized(value.description),
       category: value.category as Category,
       difficulty: value.difficulty as Difficulty,
       minutes: value.minutes,
@@ -130,10 +134,10 @@ export class RecipeForm {
       color: value.color,
       publishedAt: value.publishedAt,
       ingredients: value.ingredients.map((ingredient) => ({
-        name: (ingredient['name'] as string).trim(),
-        quantity: (ingredient['quantity'] as string).trim(),
+        name: localized((ingredient['name'] as string).trim()),
+        quantity: localized((ingredient['quantity'] as string).trim()),
       })),
-      steps: value.steps.map((step) => (step as string).trim()),
+      steps: value.steps.map((step) => localized((step as string).trim())),
     };
 
     const id = this.recipeService.addRecipe(recipe);

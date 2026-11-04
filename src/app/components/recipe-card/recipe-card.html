@@ -5,8 +5,8 @@
     </div>
     <div class="card-body">
       <span class="badge">{{ i18n.t().labels.categories[recipe().category] }}</span>
-      <h3>{{ recipe().title }}</h3>
-      <p class="description">{{ recipe().description }}</p>
+      <h3>{{ i18n.text(recipe().title) }}</h3>
+      <p class="description">{{ i18n.text(recipe().description) }}</p>
       <ul class="meta">
         <li>{{ recipe().minutes }} {{ i18n.t().shared.minutes }}</li>
         <li>{{ recipe().servings }} {{ i18n.t().shared.servings }}</li>

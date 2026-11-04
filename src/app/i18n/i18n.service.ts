@@ -1,6 +1,7 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
 
 import { translations, Dictionary } from './dictionaries';
+import { LocalizedText } from '../models/recipe';
 
 export type Language = 'it' | 'en';
 
@@ -20,6 +21,11 @@ export class I18nService {
 
   /** Dizionario della lingua corrente. */
   readonly t = computed(() => translations[this.languageSignal()]);
+
+  /** Restituisce il testo di un campo localizzato nella lingua corrente. */
+  text(value: LocalizedText): string {
+    return value[this.languageSignal()] ?? value.it;
+  }
 
   constructor() {
     effect(() => {

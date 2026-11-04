@@ -5,8 +5,8 @@
     <span class="hero-emoji" aria-hidden="true">{{ r.emoji }}</span>
     <div class="hero-text">
       <span class="badge">{{ i18n.t().labels.categories[r.category] }}</span>
-      <h1>{{ r.title }}</h1>
-      <p class="hero-description">{{ r.description }}</p>
+      <h1>{{ i18n.text(r.title) }}</h1>
+      <p class="hero-description">{{ i18n.text(r.description) }}</p>
       <ul class="meta">
         <li>{{ i18n.t().shared.time }}: {{ r.minutes }} {{ i18n.t().shared.minutes }}</li>
         <li>{{ i18n.t().shared.servingsLabel }}: {{ r.servings }}</li>
@@ -24,10 +24,10 @@
       <h2>{{ i18n.t().recipeDetail.ingredients }}</h2>
       <p class="servings-note">{{ i18n.t().shared.quantitiesFor }} {{ r.servings }} {{ i18n.t().shared.people }}</p>
       <ul>
-        @for (ingredient of r.ingredients; track ingredient.name) {
+        @for (ingredient of r.ingredients; track $index) {
           <li>
-            <span>{{ ingredient.name }}</span>
-            <strong>{{ ingredient.quantity }}</strong>
+            <span>{{ i18n.text(ingredient.name) }}</span>
+            <strong>{{ i18n.text(ingredient.quantity) }}</strong>
           </li>
         }
       </ul>
@@ -37,7 +37,7 @@
       <h2>{{ i18n.t().recipeDetail.steps }}</h2>
       <ol>
         @for (step of r.steps; track $index) {
-          <li>{{ step }}</li>
+          <li>{{ i18n.text(step) }}</li>
         }
       </ol>
     </section>

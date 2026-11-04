@@ -1,6 +1,6 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
 import { RECIPES } from '../data/recipes';
-import { Category, Difficulty, Recipe } from '../models/recipe';
+import { Category, Difficulty, LocalizedText, Recipe } from '../models/recipe';
 
 const FAVORITES_KEY = 'ricettario.favorites';
 const RECIPES_KEY = 'ricettario.recipes';
@@ -31,7 +31,7 @@ export class RecipeService {
 
   /** Aggiunge una ricetta creata dall'utente e restituisce l'id generato. */
   addRecipe(recipe: Omit<Recipe, 'id'>): string {
-    const id = this.uniqueId(recipe.title);
+    const id = this.uniqueId(recipe.title.it);
     this.allRecipes.update((recipes) => [...recipes, { ...recipe, id }]);
     return id;
   }
@@ -71,8 +71,8 @@ export class RecipeService {
     const recipe = value as Record<string, unknown>;
     return (
       typeof recipe['id'] === 'string' &&
-      typeof recipe['title'] === 'string' &&
-      typeof recipe['description'] === 'string' &&
+      this.isLocalizedText(recipe['title']) &&
+      this.isLocalizedText(recipe['description']) &&
       typeof recipe['category'] === 'string' &&
       typeof recipe['difficulty'] === 'string' &&
       typeof recipe['minutes'] === 'number' &&
@@ -81,8 +81,26 @@ export class RecipeService {
       typeof recipe['color'] === 'string' &&
       typeof recipe['publishedAt'] === 'string' &&
       Array.isArray(recipe['ingredients']) &&
-      Array.isArray(recipe['steps'])
+      recipe['ingredients'].every(
+        (ingredient) =>
+          typeof ingredient === 'object' &&
+          ingredient !== null &&
+          this.isLocalizedText((ingredient as Record<string, unknown>)['name']) &&
+          this.isLocalizedText((ingredient as Record<string, unknown>)['quantity']),
+      ) &&
+      Array.isArray(recipe['steps']) &&
+      recipe['steps'].every((step) => this.isLocalizedText(step))
     );
+  }
+
+  /** Accetta sia il nuovo formato {it, en} sia il vecchio formato stringa (retrocompatibilità). */
+  private isLocalizedText(value: unknown): value is LocalizedText {
+    if (typeof value === 'object' && value !== null) {
+      const text = value as Record<string, unknown>;
+      return typeof text['it'] === 'string' && typeof text['en'] === 'string';
+    }
+    // Vecchie ricette salvate con stringhe semplici: convertibili al volo.
+    return typeof value === 'string';
   }
 
   private loadUserRecipes(): Recipe[] {

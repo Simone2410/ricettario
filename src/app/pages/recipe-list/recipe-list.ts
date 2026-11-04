@@ -48,9 +48,9 @@ export class RecipeList {
     return this.recipeService.recipes().filter((recipe) => {
       const matchesQuery =
         query === '' ||
-        recipe.title.toLowerCase().includes(query) ||
-        recipe.description.toLowerCase().includes(query) ||
-        recipe.ingredients.some((ingredient) => ingredient.name.toLowerCase().includes(query));
+        this.i18n.text(recipe.title).toLowerCase().includes(query) ||
+        this.i18n.text(recipe.description).toLowerCase().includes(query) ||
+        recipe.ingredients.some((ingredient) => this.i18n.text(ingredient.name).toLowerCase().includes(query));
       const matchesCategory = category === '' || recipe.category === category;
       const matchesDifficulty = difficulty === '' || recipe.difficulty === difficulty;
       return matchesQuery && matchesCategory && matchesDifficulty;
@@ -79,7 +79,7 @@ export class RecipeList {
         result = compare(a.publishedAt, b.publishedAt);
       }
       // Tie-breaker stabile: a parità di valore ordina per titolo.
-      return result !== 0 ? direction * result : compare(a.title, b.title);
+      return result !== 0 ? direction * result : compare(this.i18n.text(a.title), this.i18n.text(b.title));
     });
   });
 
