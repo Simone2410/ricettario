@@ -40,7 +40,7 @@
   >
     {{ i18n.t().recipeList.sortMinutes }}
     @if (sortBy() === 'minutes') {
-      <span class="sort-arrow">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
+      <span class="sort-arrow" aria-hidden="true">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
     }
   </button>
   <button
@@ -52,7 +52,7 @@
   >
     {{ i18n.t().recipeList.sortDifficulty }}
     @if (sortBy() === 'difficulty') {
-      <span class="sort-arrow">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
+      <span class="sort-arrow" aria-hidden="true">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
     }
   </button>
   <button
@@ -64,12 +64,12 @@
   >
     {{ i18n.t().recipeList.sortPublished }}
     @if (sortBy() === 'publishedAt') {
-      <span class="sort-arrow">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
+      <span class="sort-arrow" aria-hidden="true">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
     }
   </button>
 </div>
 
-<p class="results">{{ resultsLabel() }}</p>
+<p class="results" role="status" aria-live="polite">{{ resultsLabel() }}</p>
 
 @if (sortedRecipes().length > 0) {
   <div class="recipe-grid">

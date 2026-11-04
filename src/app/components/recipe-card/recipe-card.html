@@ -1,7 +1,7 @@
 <article class="card">
   <a class="card-link" [routerLink]="['/ricette', recipe().id]">
     <div class="card-image" [style.background]="recipe().color">
-      <span class="card-emoji">{{ recipe().emoji }}</span>
+      <span class="card-emoji" aria-hidden="true">{{ recipe().emoji }}</span>
     </div>
     <div class="card-body">
       <span class="badge">{{ i18n.t().labels.categories[recipe().category] }}</span>

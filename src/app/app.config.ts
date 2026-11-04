@@ -4,6 +4,7 @@ import localeIt from '@angular/common/locales/it';
 import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
+import { PageTitleService } from './page-title.service';
 import { routes } from './app.routes';
 
 registerLocaleData(localeIt);
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     { provide: LOCALE_ID, useValue: 'it-IT' },
+    PageTitleService,
   ],
 };

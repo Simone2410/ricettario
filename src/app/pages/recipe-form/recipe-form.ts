@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, ElementRef, effect, inject, signal } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -22,6 +22,7 @@ export class RecipeForm {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly recipeService = inject(RecipeService);
+  private readonly host = inject(ElementRef<HTMLElement>);
   protected readonly i18n = inject(I18nService);
 
   protected readonly submitted = signal(false);
@@ -113,6 +114,7 @@ export class RecipeForm {
   protected onSubmit(): void {
     this.submitted.set(true);
     if (this.form.invalid) {
+      this.focusFirstInvalid();
       return;
     }
 
@@ -137,6 +139,12 @@ export class RecipeForm {
     const id = this.recipeService.addRecipe(recipe);
     this.clearDraft();
     this.router.navigate(['/ricette', id]);
+  }
+
+  /** Sposta il focus sul primo campo invalido per l'accessibilità da tastiera/screen reader. */
+  private focusFirstInvalid(): void {
+    const invalid = this.host.nativeElement.querySelectorAll('[aria-invalid="true"]') as NodeListOf<HTMLElement>;
+    invalid[0]?.focus();
   }
 
   private createIngredientGroup() {

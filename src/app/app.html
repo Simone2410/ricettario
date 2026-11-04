@@ -1,14 +1,15 @@
 <header class="site-header">
+  <a class="skip-link" href="#main-content">{{ i18n.t().shell.skipToContent }}</a>
   <div class="container header-inner">
     <a class="brand" routerLink="/ricette">
-      <span class="brand-icon">🍝</span>
+      <span class="brand-icon" aria-hidden="true">🍝</span>
       <span class="brand-name">{{ i18n.t().shell.brand }}</span>
     </a>
     <nav class="main-nav" [attr.aria-label]="i18n.t().shell.navAriaLabel">
-      <a routerLink="/ricette" routerLinkActive="active">{{ i18n.t().shell.navRecipes }}</a>
-      <a routerLink="/preferiti" routerLinkActive="active">{{ i18n.t().shell.navFavorites }} ({{ recipeService.favoritesCount() }})</a>
-      <a routerLink="/chi-siamo" routerLinkActive="active">{{ i18n.t().shell.navAbout }}</a>
-      <a class="nav-add" routerLink="/nuova-ricetta" routerLinkActive="active">{{ i18n.t().shell.navAddRecipe }}</a>
+      <a routerLink="/ricette" routerLinkActive="active" [attr.aria-current]="router.url.startsWith('/ricette') ? 'page' : null">{{ i18n.t().shell.navRecipes }}</a>
+      <a routerLink="/preferiti" routerLinkActive="active" [attr.aria-current]="router.url.startsWith('/preferiti') ? 'page' : null">{{ i18n.t().shell.navFavorites }} ({{ recipeService.favoritesCount() }})</a>
+      <a routerLink="/chi-siamo" routerLinkActive="active" [attr.aria-current]="router.url.startsWith('/chi-siamo') ? 'page' : null">{{ i18n.t().shell.navAbout }}</a>
+      <a class="nav-add" routerLink="/nuova-ricetta" routerLinkActive="active" [attr.aria-current]="router.url.startsWith('/nuova-ricetta') ? 'page' : null">{{ i18n.t().shell.navAddRecipe }}</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language / Lingua">
       @for (lang of languages; track lang.value) {
@@ -38,7 +39,7 @@
   </div>
 </header>
 
-<main class="container main-content">
+<main class="container main-content" id="main-content" tabindex="-1">
   <router-outlet />
 </main>
 

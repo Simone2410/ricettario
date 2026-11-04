@@ -5,59 +5,59 @@
   <div class="form-grid">
     <div class="field">
       <label for="title">{{ i18n.t().recipeForm.titleLabel }}</label>
-      <input id="title" type="text" formControlName="title" [placeholder]="i18n.t().recipeForm.titlePlaceholder" />
+      <input id="title" type="text" formControlName="title" [placeholder]="i18n.t().recipeForm.titlePlaceholder" [attr.aria-invalid]="hasError('title')" aria-describedby="title-error" />
       @if (hasError('title')) {
-        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+        <p class="error" id="title-error">{{ i18n.t().recipeForm.required }}</p>
       }
     </div>
 
     <div class="field">
       <label for="description">{{ i18n.t().recipeForm.descriptionLabel }}</label>
-      <input id="description" type="text" formControlName="description" [placeholder]="i18n.t().recipeForm.descriptionPlaceholder" />
+      <input id="description" type="text" formControlName="description" [placeholder]="i18n.t().recipeForm.descriptionPlaceholder" [attr.aria-invalid]="hasError('description')" aria-describedby="description-error" />
       @if (hasError('description')) {
-        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+        <p class="error" id="description-error">{{ i18n.t().recipeForm.required }}</p>
       }
     </div>
 
     <div class="field">
       <label for="category">{{ i18n.t().recipeForm.categoryLabel }}</label>
-      <select id="category" formControlName="category">
+      <select id="category" formControlName="category" [attr.aria-invalid]="hasError('category')" aria-describedby="category-error">
         <option value="" disabled>{{ i18n.t().recipeForm.categoryPlaceholder }}</option>
         @for (item of categories; track item.value) {
           <option [value]="item.value">{{ item.label }}</option>
         }
       </select>
       @if (hasError('category')) {
-        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+        <p class="error" id="category-error">{{ i18n.t().recipeForm.required }}</p>
       }
     </div>
 
     <div class="field">
       <label for="difficulty">{{ i18n.t().recipeForm.difficultyLabel }}</label>
-      <select id="difficulty" formControlName="difficulty">
+      <select id="difficulty" formControlName="difficulty" [attr.aria-invalid]="hasError('difficulty')" aria-describedby="difficulty-error">
         <option value="" disabled>{{ i18n.t().recipeForm.difficultyLabel }}</option>
         @for (item of difficulties; track item.value) {
           <option [value]="item.value">{{ item.label }}</option>
         }
       </select>
       @if (hasError('difficulty')) {
-        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+        <p class="error" id="difficulty-error">{{ i18n.t().recipeForm.required }}</p>
       }
     </div>
 
     <div class="field">
       <label for="minutes">{{ i18n.t().recipeForm.minutesLabel }}</label>
-      <input id="minutes" type="number" formControlName="minutes" min="1" max="600" />
+      <input id="minutes" type="number" formControlName="minutes" min="1" max="600" [attr.aria-invalid]="hasError('minutes')" aria-describedby="minutes-error" />
       @if (hasError('minutes')) {
-        <p class="error">{{ i18n.t().recipeForm.minOne }}</p>
+        <p class="error" id="minutes-error">{{ i18n.t().recipeForm.minOne }}</p>
       }
     </div>
 
     <div class="field">
       <label for="servings">{{ i18n.t().recipeForm.servingsLabel }}</label>
-      <input id="servings" type="number" formControlName="servings" min="1" max="20" />
+      <input id="servings" type="number" formControlName="servings" min="1" max="20" [attr.aria-invalid]="hasError('servings')" aria-describedby="servings-error" />
       @if (hasError('servings')) {
-        <p class="error">{{ i18n.t().recipeForm.minOne }}</p>
+        <p class="error" id="servings-error">{{ i18n.t().recipeForm.minOne }}</p>
       }
     </div>
 
@@ -73,9 +73,9 @@
 
     <div class="field">
       <label for="publishedAt">{{ i18n.t().recipeForm.dateLabel }}</label>
-      <input id="publishedAt" type="date" formControlName="publishedAt" />
+      <input id="publishedAt" type="date" formControlName="publishedAt" [attr.aria-invalid]="hasError('publishedAt')" aria-describedby="publishedAt-error" />
       @if (hasError('publishedAt')) {
-        <p class="error">{{ i18n.t().recipeForm.required }}</p>
+        <p class="error" id="publishedAt-error">{{ i18n.t().recipeForm.required }}</p>
       }
     </div>
   </div>
@@ -88,18 +88,21 @@
           type="text"
           formControlName="name"
           [placeholder]="i18n.t().recipeForm.ingredientNamePlaceholder"
+          [attr.aria-label]="i18n.t().recipeForm.ingredientNameAria"
           [attr.aria-invalid]="ingredientError($index, 'name')"
         />
         <input
           type="text"
           formControlName="quantity"
           [placeholder]="i18n.t().recipeForm.ingredientQuantityPlaceholder"
+          [attr.aria-label]="i18n.t().recipeForm.ingredientQuantityAria"
           [attr.aria-invalid]="ingredientError($index, 'quantity')"
         />
         <button
           type="button"
           class="remove-button"
           [disabled]="ingredients.length <= 1"
+          [attr.aria-label]="i18n.t().recipeForm.removeIngredientAria"
           (click)="removeIngredient($index)"
         >
           ×
@@ -119,12 +122,14 @@
           rows="2"
           [formControlName]="$index"
           [placeholder]="i18n.t().recipeForm.stepPlaceholder"
+          [attr.aria-label]="i18n.t().recipeForm.stepAria"
           [attr.aria-invalid]="stepError($index)"
         ></textarea>
         <button
           type="button"
           class="remove-button"
           [disabled]="steps.length <= 1"
+          [attr.aria-label]="i18n.t().recipeForm.removeStepAria"
           (click)="removeStep($index)"
         >
           ×

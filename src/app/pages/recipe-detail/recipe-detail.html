@@ -2,7 +2,7 @@
   <a class="back-link" routerLink="/ricette">{{ i18n.t().recipeDetail.back }}</a>
 
   <section class="hero" [style.background]="r.color">
-    <span class="hero-emoji">{{ r.emoji }}</span>
+    <span class="hero-emoji" aria-hidden="true">{{ r.emoji }}</span>
     <div class="hero-text">
       <span class="badge">{{ i18n.t().labels.categories[r.category] }}</span>
       <h1>{{ r.title }}</h1>

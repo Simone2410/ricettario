@@ -8,6 +8,7 @@ export interface Dictionary {
     navFavorites: string;
     navAbout: string;
     navAddRecipe: string;
+    skipToContent: string;
     copyright: string;
     tagline: string;
     themeGroupAria: string;
@@ -85,6 +86,19 @@ export interface Dictionary {
     atLeastOneIngredient: string;
     atLeastOneStep: string;
     intro: string;
+    ingredientNameAria: string;
+    ingredientQuantityAria: string;
+    stepAria: string;
+    removeIngredientAria: string;
+    removeStepAria: string;
+  };
+  pages: {
+    recipes: string;
+    recipeDetail: string;
+    newRecipe: string;
+    favorites: string;
+    about: string;
+    notFound: string;
   };
   recipeDetail: {
     back: string;
@@ -122,6 +136,7 @@ export const it: Dictionary = {
     navFavorites: 'Preferiti',
     navAbout: 'Chi siamo',
     navAddRecipe: '+ Nuova',
+    skipToContent: 'Vai al contenuto',
     copyright: 'Il Ricettario. Tutti i diritti riservati.',
     tagline: 'Ricette della tradizione italiana, spiegate passo dopo passo.',
     themeGroupAria: 'Scelta del tema',
@@ -208,6 +223,19 @@ export const it: Dictionary = {
     atLeastOneIngredient: 'Aggiungi almeno un ingrediente',
     atLeastOneStep: 'Aggiungi almeno un passo',
     intro: 'Compila i campi qui sotto: la ricetta verrà salvata nel tuo browser e comparirà nel catalogo.',
+    ingredientNameAria: 'Nome ingrediente',
+    ingredientQuantityAria: 'Quantità ingrediente',
+    stepAria: 'Passo della preparazione',
+    removeIngredientAria: 'Rimuovi ingrediente',
+    removeStepAria: 'Rimuovi passo',
+  },
+  pages: {
+    recipes: 'Ricette | Il Ricettario',
+    recipeDetail: 'Dettaglio ricetta | Il Ricettario',
+    newRecipe: 'Nuova ricetta | Il Ricettario',
+    favorites: 'Preferiti | Il Ricettario',
+    about: 'Chi siamo | Il Ricettario',
+    notFound: 'Pagina non trovata | Il Ricettario',
   },
   recipeDetail: {
     back: '← Torna alle ricette',
@@ -245,6 +273,7 @@ export const en: Dictionary = {
     navFavorites: 'Favorites',
     navAbout: 'About us',
     navAddRecipe: '+ New',
+    skipToContent: 'Skip to content',
     copyright: 'The Recipe Book. All rights reserved.',
     tagline: 'Recipes of the Italian tradition, explained step by step.',
     themeGroupAria: 'Theme selection',
@@ -331,6 +360,19 @@ export const en: Dictionary = {
     atLeastOneIngredient: 'Add at least one ingredient',
     atLeastOneStep: 'Add at least one step',
     intro: 'Fill in the fields below: the recipe will be saved in your browser and appear in the catalog.',
+    ingredientNameAria: 'Ingredient name',
+    ingredientQuantityAria: 'Ingredient quantity',
+    stepAria: 'Preparation step',
+    removeIngredientAria: 'Remove ingredient',
+    removeStepAria: 'Remove step',
+  },
+  pages: {
+    recipes: 'Recipes | The Recipe Book',
+    recipeDetail: 'Recipe detail | The Recipe Book',
+    newRecipe: 'New recipe | The Recipe Book',
+    favorites: 'Favorites | The Recipe Book',
+    about: 'About us | The Recipe Book',
+    notFound: 'Page not found | The Recipe Book',
   },
   recipeDetail: {
     back: '← Back to recipes',
