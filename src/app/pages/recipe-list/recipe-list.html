@@ -25,16 +25,55 @@
     }
   </select>
 
-  @if (hasFilters()) {
+  @if (hasFilters() || sortBy() !== null) {
     <button type="button" class="button secondary" (click)="resetFilters()">{{ i18n.t().recipeList.resetFilters }}</button>
   }
 </form>
 
+<div class="sort-bar" role="group" [attr.aria-label]="i18n.t().recipeList.sortLabel">
+  <button
+    type="button"
+    class="sort-button"
+    [class.active]="sortBy() === 'minutes'"
+    [attr.aria-pressed]="sortBy() === 'minutes'"
+    (click)="onSortClick('minutes')"
+  >
+    {{ i18n.t().recipeList.sortMinutes }}
+    @if (sortBy() === 'minutes') {
+      <span class="sort-arrow">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
+    }
+  </button>
+  <button
+    type="button"
+    class="sort-button"
+    [class.active]="sortBy() === 'difficulty'"
+    [attr.aria-pressed]="sortBy() === 'difficulty'"
+    (click)="onSortClick('difficulty')"
+  >
+    {{ i18n.t().recipeList.sortDifficulty }}
+    @if (sortBy() === 'difficulty') {
+      <span class="sort-arrow">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
+    }
+  </button>
+  <button
+    type="button"
+    class="sort-button"
+    [class.active]="sortBy() === 'publishedAt'"
+    [attr.aria-pressed]="sortBy() === 'publishedAt'"
+    (click)="onSortClick('publishedAt')"
+  >
+    {{ i18n.t().recipeList.sortPublished }}
+    @if (sortBy() === 'publishedAt') {
+      <span class="sort-arrow">{{ sortDir() === 'asc' ? '↑' : '↓' }}</span>
+    }
+  </button>
+</div>
+
 <p class="results">{{ resultsLabel() }}</p>
 
-@if (filteredRecipes().length > 0) {
+@if (sortedRecipes().length > 0) {
   <div class="recipe-grid">
-    @for (recipe of filteredRecipes(); track recipe.id) {
+    @for (recipe of sortedRecipes(); track recipe.id) {
       <app-recipe-card [recipe]="recipe" />
     }
   </div>

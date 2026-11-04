@@ -44,6 +44,12 @@ export interface Dictionary {
     resultMany: string;
     emptyText: string;
     showAll: string;
+    sortLabel: string;
+    sortMinutes: string;
+    sortDifficulty: string;
+    sortPublished: string;
+    sortAsc: string;
+    sortDesc: string;
   };
   recipeDetail: {
     back: string;
@@ -126,6 +132,12 @@ export const it: Dictionary = {
     resultMany: '{count} ricette trovate',
     emptyText: 'Nessuna ricetta corrisponde ai filtri selezionati.',
     showAll: 'Mostra tutte le ricette',
+    sortLabel: 'Ordina per',
+    sortMinutes: 'Tempo',
+    sortDifficulty: 'Difficoltà',
+    sortPublished: 'Data di pubblicazione',
+    sortAsc: 'Ordine crescente',
+    sortDesc: 'Ordine decrescente',
   },
   recipeDetail: {
     back: '← Torna alle ricette',
@@ -208,6 +220,12 @@ export const en: Dictionary = {
     resultMany: '{count} recipes found',
     emptyText: 'No recipe matches the selected filters.',
     showAll: 'Show all recipes',
+    sortLabel: 'Sort by',
+    sortMinutes: 'Time',
+    sortDifficulty: 'Difficulty',
+    sortPublished: 'Publication date',
+    sortAsc: 'Ascending order',
+    sortDesc: 'Descending order',
   },
   recipeDetail: {
     back: '← Back to recipes',

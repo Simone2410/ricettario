@@ -1,6 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RecipeCard } from '../../components/recipe-card/recipe-card';
-import { Category, Difficulty } from '../../models/recipe';
+import {
+  Category,
+  DIFFICULTY_RANK,
+  Difficulty,
+  SortBy,
+  SortDirection,
+} from '../../models/recipe';
 import { I18nService } from '../../i18n/i18n.service';
 import { RecipeService } from '../../services/recipe.service';
 
@@ -17,6 +23,8 @@ export class RecipeList {
   protected readonly query = signal('');
   protected readonly category = signal<Category | ''>('');
   protected readonly difficulty = signal<Difficulty | ''>('');
+  protected readonly sortBy = signal<SortBy | null>(null);
+  protected readonly sortDir = signal<SortDirection>('desc');
 
   protected readonly categories = computed(() =>
     Object.entries(this.i18n.t().labels.categories).map(([value, label]) => ({
@@ -49,9 +57,35 @@ export class RecipeList {
     });
   });
 
+  protected readonly sortedRecipes = computed(() => {
+    const filtered = this.filteredRecipes();
+    const sortBy = this.sortBy();
+    if (sortBy === null) {
+      return filtered;
+    }
+
+    const direction = this.sortDir() === 'asc' ? 1 : -1;
+    const compare = (a: number | string, b: number | string): number =>
+      a < b ? -1 : a > b ? 1 : 0;
+
+    return [...filtered].sort((a, b) => {
+      let result: number;
+      if (sortBy === 'minutes') {
+        result = compare(a.minutes, b.minutes);
+      } else if (sortBy === 'difficulty') {
+        result = compare(DIFFICULTY_RANK[a.difficulty], DIFFICULTY_RANK[b.difficulty]);
+      } else {
+        // publishedAt: stringa ISO 'YYYY-MM-DD', l'ordine lessicografico è cronologico.
+        result = compare(a.publishedAt, b.publishedAt);
+      }
+      // Tie-breaker stabile: a parità di valore ordina per titolo.
+      return result !== 0 ? direction * result : compare(a.title, b.title);
+    });
+  });
+
   protected readonly resultsLabel = computed(() => {
     const t = this.i18n.t().recipeList;
-    const count = this.filteredRecipes().length;
+    const count = this.sortedRecipes().length;
     return count === 1 ? t.resultOne : t.resultMany.replace('{count}', String(count));
   });
 
@@ -71,9 +105,25 @@ export class RecipeList {
     this.difficulty.set((event.target as HTMLSelectElement).value as Difficulty | '');
   }
 
+  /**
+   * Clic su un criterio: se è già attivo inverte la direzione,
+   * altrimenti lo attiva con la direzione di default per quel campo.
+   */
+  protected onSortClick(sortBy: SortBy): void {
+    if (this.sortBy() === sortBy) {
+      this.sortDir.update((dir) => (dir === 'asc' ? 'desc' : 'asc'));
+    } else {
+      this.sortBy.set(sortBy);
+      // Data: dalla più recente (desc). Tempo e difficoltà: dal più semplice/rapido (asc).
+      this.sortDir.set(sortBy === 'publishedAt' ? 'desc' : 'asc');
+    }
+  }
+
   protected resetFilters(): void {
     this.query.set('');
     this.category.set('');
     this.difficulty.set('');
+    this.sortBy.set(null);
+    this.sortDir.set('desc');
   }
 }

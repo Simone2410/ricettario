@@ -34,3 +34,14 @@ export const DIFFICULTY_LABELS: Record<Difficulty, string> = {
   media: 'Media',
   difficile: 'Difficile',
 };
+
+/** Rango numerico per l'ordinamento: facile < media < difficile. */
+export const DIFFICULTY_RANK: Record<Difficulty, number> = {
+  facile: 0,
+  media: 1,
+  difficile: 2,
+};
+
+export type SortBy = 'default' | 'minutes' | 'difficulty' | 'publishedAt';
+
+export type SortDirection = 'asc' | 'desc';
