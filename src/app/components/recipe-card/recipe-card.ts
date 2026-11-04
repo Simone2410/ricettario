@@ -1,6 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CATEGORY_LABELS, DIFFICULTY_LABELS, Recipe } from '../../models/recipe';
+import { Recipe } from '../../models/recipe';
+import { I18nService } from '../../i18n/i18n.service';
 import { RecipeService } from '../../services/recipe.service';
 
 @Component({
@@ -13,9 +14,8 @@ export class RecipeCard {
   readonly recipe = input.required<Recipe>();
 
   private readonly recipeService = inject(RecipeService);
+  protected readonly i18n = inject(I18nService);
 
-  protected readonly categoryLabels = CATEGORY_LABELS;
-  protected readonly difficultyLabels = DIFFICULTY_LABELS;
   protected readonly isFavorite = computed(() => this.recipeService.isFavorite(this.recipe().id));
 
   protected toggleFavorite(): void {

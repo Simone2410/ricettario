@@ -1,28 +1,28 @@
 @if (recipe(); as r) {
-  <a class="back-link" routerLink="/ricette">← Torna alle ricette</a>
+  <a class="back-link" routerLink="/ricette">{{ i18n.t().recipeDetail.back }}</a>
 
   <section class="hero" [style.background]="r.color">
     <span class="hero-emoji">{{ r.emoji }}</span>
     <div class="hero-text">
-      <span class="badge">{{ categoryLabels[r.category] }}</span>
+      <span class="badge">{{ i18n.t().labels.categories[r.category] }}</span>
       <h1>{{ r.title }}</h1>
       <p class="hero-description">{{ r.description }}</p>
       <ul class="meta">
-        <li>Tempo: {{ r.minutes }} min</li>
-        <li>Porzioni: {{ r.servings }}</li>
-        <li>Difficoltà: {{ difficultyLabels[r.difficulty] }}</li>
+        <li>{{ i18n.t().shared.time }}: {{ r.minutes }} {{ i18n.t().shared.minutes }}</li>
+        <li>{{ i18n.t().shared.servingsLabel }}: {{ r.servings }}</li>
+        <li>{{ i18n.t().shared.difficulty }}: {{ i18n.t().labels.difficulties[r.difficulty] }}</li>
       </ul>
-      <p class="published">Pubblicata il {{ r.publishedAt | date: 'd MMMM y' }}</p>
+      <p class="published">{{ i18n.t().shared.publishedOn }} {{ r.publishedAt | date: 'd MMMM y' : undefined : dateLocale() }}</p>
       <button type="button" class="button" [class.secondary]="isFavorite()" (click)="toggleFavorite()">
-        {{ isFavorite() ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti' }}
+        {{ isFavorite() ? i18n.t().shared.removeFavorite : i18n.t().shared.addFavorite }}
       </button>
     </div>
   </section>
 
   <div class="columns">
     <section class="ingredients">
-      <h2>Ingredienti</h2>
-      <p class="servings-note">Quantità per {{ r.servings }} persone</p>
+      <h2>{{ i18n.t().recipeDetail.ingredients }}</h2>
+      <p class="servings-note">{{ i18n.t().shared.quantitiesFor }} {{ r.servings }} {{ i18n.t().shared.people }}</p>
       <ul>
         @for (ingredient of r.ingredients; track ingredient.name) {
           <li>
@@ -34,7 +34,7 @@
     </section>
 
     <section class="steps">
-      <h2>Preparazione</h2>
+      <h2>{{ i18n.t().recipeDetail.steps }}</h2>
       <ol>
         @for (step of r.steps; track $index) {
           <li>{{ step }}</li>
@@ -44,8 +44,8 @@
   </div>
 } @else {
   <div class="empty-state">
-    <h1>Ricetta non trovata</h1>
-    <p>La ricetta che cerchi non esiste o è stata rimossa.</p>
-    <a class="button" routerLink="/ricette">Torna all’elenco</a>
+    <h1>{{ i18n.t().recipeDetail.notFoundTitle }}</h1>
+    <p>{{ i18n.t().recipeDetail.notFoundText }}</p>
+    <a class="button" routerLink="/ricette">{{ i18n.t().recipeDetail.backToList }}</a>
   </div>
 }

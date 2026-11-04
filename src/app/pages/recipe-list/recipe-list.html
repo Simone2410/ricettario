@@ -1,32 +1,32 @@
-<h1>Tutte le ricette</h1>
-<p class="page-intro">Cerca tra le ricette della tradizione italiana e salva le tue preferite.</p>
+<h1>{{ i18n.t().recipeList.title }}</h1>
+<p class="page-intro">{{ i18n.t().recipeList.intro }}</p>
 
 <form class="filters" (submit)="$event.preventDefault()">
   <input
     type="search"
     class="search"
-    placeholder="Cerca una ricetta o un ingrediente..."
-    aria-label="Cerca una ricetta"
+    [placeholder]="i18n.t().recipeList.searchPlaceholder"
+    [attr.aria-label]="i18n.t().recipeList.searchAria"
     [value]="query()"
     (input)="onQueryInput($event)"
   />
 
-  <select aria-label="Filtra per categoria" (change)="onCategoryChange($event)">
-    <option value="" [selected]="category() === ''">Tutte le categorie</option>
-    @for (item of categories; track item.value) {
+  <select [attr.aria-label]="i18n.t().recipeList.categoryAria" (change)="onCategoryChange($event)">
+    <option value="" [selected]="category() === ''">{{ i18n.t().recipeList.allCategories }}</option>
+    @for (item of categories(); track item.value) {
       <option [value]="item.value" [selected]="item.value === category()">{{ item.label }}</option>
     }
   </select>
 
-  <select aria-label="Filtra per difficoltà" (change)="onDifficultyChange($event)">
-    <option value="" [selected]="difficulty() === ''">Ogni difficoltà</option>
-    @for (item of difficulties; track item.value) {
+  <select [attr.aria-label]="i18n.t().recipeList.difficultyAria" (change)="onDifficultyChange($event)">
+    <option value="" [selected]="difficulty() === ''">{{ i18n.t().recipeList.allDifficulties }}</option>
+    @for (item of difficulties(); track item.value) {
       <option [value]="item.value" [selected]="item.value === difficulty()">{{ item.label }}</option>
     }
   </select>
 
   @if (hasFilters()) {
-    <button type="button" class="button secondary" (click)="resetFilters()">Azzera filtri</button>
+    <button type="button" class="button secondary" (click)="resetFilters()">{{ i18n.t().recipeList.resetFilters }}</button>
   }
 </form>
 
@@ -40,7 +40,7 @@
   </div>
 } @else {
   <div class="empty-state">
-    <p>Nessuna ricetta corrisponde ai filtri selezionati.</p>
-    <button type="button" class="button" (click)="resetFilters()">Mostra tutte le ricette</button>
+    <p>{{ i18n.t().recipeList.emptyText }}</p>
+    <button type="button" class="button" (click)="resetFilters()">{{ i18n.t().recipeList.showAll }}</button>
   </div>
 }

@@ -7,23 +7,45 @@
 
 .hero {
   display: flex;
-  gap: 48px;
+  flex-direction: column;
+  gap: 16px;
   align-items: center;
-  padding: 40px 48px;
-  margin-bottom: 40px;
+  padding: 24px 20px;
+  margin-bottom: 32px;
+  text-align: center;
   border-radius: 18px;
 }
 
 .hero-emoji {
-  flex: none;
-  width: 220px;
-  font-size: 140px;
-  text-align: center;
+  width: auto;
+  font-size: 96px;
+}
+
+@media (min-width: 960px) {
+  .hero {
+    flex-direction: row;
+    gap: 48px;
+    padding: 40px 48px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .hero-emoji {
+    flex: none;
+    width: 220px;
+    font-size: 140px;
+  }
 }
 
 .hero-description {
   margin: 0 0 16px;
-  font-size: 19px;
+  font-size: 17px;
+}
+
+@media (min-width: 640px) {
+  .hero-description {
+    font-size: 19px;
+  }
 }
 
 .meta {
@@ -40,16 +62,30 @@
 
 .columns {
   display: grid;
-  grid-template-columns: 380px 700px;
-  gap: 60px;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 960px) {
+  .columns {
+    grid-template-columns: 380px 1fr;
+    gap: 60px;
+  }
 }
 
 .ingredients,
 .steps {
-  padding: 28px 32px;
+  padding: 20px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 14px;
+}
+
+@media (min-width: 640px) {
+  .ingredients,
+  .steps {
+    padding: 28px 32px;
+  }
 }
 
 .servings-note {

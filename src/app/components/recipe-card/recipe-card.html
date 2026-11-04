@@ -4,13 +4,13 @@
       <span class="card-emoji">{{ recipe().emoji }}</span>
     </div>
     <div class="card-body">
-      <span class="badge">{{ categoryLabels[recipe().category] }}</span>
+      <span class="badge">{{ i18n.t().labels.categories[recipe().category] }}</span>
       <h3>{{ recipe().title }}</h3>
       <p class="description">{{ recipe().description }}</p>
       <ul class="meta">
-        <li>{{ recipe().minutes }} min</li>
-        <li>{{ recipe().servings }} porzioni</li>
-        <li>{{ difficultyLabels[recipe().difficulty] }}</li>
+        <li>{{ recipe().minutes }} {{ i18n.t().shared.minutes }}</li>
+        <li>{{ recipe().servings }} {{ i18n.t().shared.servings }}</li>
+        <li>{{ i18n.t().labels.difficulties[recipe().difficulty] }}</li>
       </ul>
     </div>
   </a>
@@ -19,7 +19,7 @@
     class="favorite"
     [class.active]="isFavorite()"
     [attr.aria-pressed]="isFavorite()"
-    [attr.aria-label]="isFavorite() ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti'"
+    [attr.aria-label]="isFavorite() ? i18n.t().shared.removeFavorite : i18n.t().shared.addFavorite"
     (click)="toggleFavorite()"
   >
     {{ isFavorite() ? '♥' : '♡' }}

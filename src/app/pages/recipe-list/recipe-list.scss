@@ -1,12 +1,21 @@
 .filters {
   display: flex;
-  gap: 16px;
-  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
   margin-bottom: 20px;
 }
 
+@media (min-width: 640px) {
+  .filters {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
 .search {
-  width: 460px;
+  width: 100%;
 }
 
 .search,
@@ -22,7 +31,17 @@ select {
 }
 
 select {
-  width: 210px;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .search {
+    width: 460px;
+  }
+
+  select {
+    width: 210px;
+  }
 }
 
 .button {

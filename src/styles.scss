@@ -29,15 +29,35 @@ h3 {
 }
 
 h1 {
-  font-size: 40px;
-}
-
-h2 {
   font-size: 28px;
 }
 
-h3 {
+h2 {
   font-size: 22px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+@media (min-width: 640px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 960px) {
+  h1 {
+    font-size: 40px;
+  }
 }
 
 a {
@@ -45,14 +65,22 @@ a {
 }
 
 .container {
-  width: 1140px;
+  width: 100%;
+  max-width: 1140px;
   margin: 0 auto;
+  padding-inline: 16px;
 }
 
 .page-intro {
   margin: 0 0 28px;
-  font-size: 19px;
+  font-size: 17px;
   color: var(--color-muted);
+}
+
+@media (min-width: 640px) {
+  .page-intro {
+    font-size: 19px;
+  }
 }
 
 .badge {
@@ -70,7 +98,8 @@ a {
 
 .meta {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 8px 12px;
   padding: 0;
   margin: 0;
   font-size: 15px;
@@ -78,11 +107,30 @@ a {
   list-style: none;
 }
 
+@media (min-width: 640px) {
+  .meta {
+    gap: 20px;
+  }
+}
+
 .recipe-grid {
   display: grid;
-  grid-template-columns: repeat(3, 340px);
-  gap: 30px;
-  justify-content: center;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .recipe-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 960px) {
+  .recipe-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
 }
 
 .empty-state {
@@ -129,11 +177,17 @@ a {
 }
 
 .prose {
-  width: 760px;
+  max-width: 760px;
 
   p {
     margin: 0 0 18px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.7;
+  }
+}
+
+@media (min-width: 640px) {
+  .prose p {
+    font-size: 18px;
   }
 }

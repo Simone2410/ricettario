@@ -1,5 +1,5 @@
-<h1>Le tue ricette preferite</h1>
-<p class="page-intro">Qui trovi le ricette che hai salvato. I preferiti restano memorizzati nel tuo browser.</p>
+<h1>{{ i18n.t().favorites.title }}</h1>
+<p class="page-intro">{{ i18n.t().favorites.intro }}</p>
 
 @if (recipeService.favorites().length > 0) {
   <div class="recipe-grid">
@@ -9,7 +9,7 @@
   </div>
 } @else {
   <div class="empty-state">
-    <p>Non hai ancora salvato nessuna ricetta. Esplora il catalogo e tocca il cuore per aggiungerla.</p>
-    <a class="button" routerLink="/ricette">Vai alle ricette</a>
+    <p>{{ i18n.t().favorites.emptyText }}</p>
+    <a class="button" routerLink="/ricette">{{ i18n.t().favorites.goToRecipes }}</a>
   </div>
 }

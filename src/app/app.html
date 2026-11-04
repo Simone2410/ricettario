@@ -2,13 +2,26 @@
   <div class="container header-inner">
     <a class="brand" routerLink="/ricette">
       <span class="brand-icon">🍝</span>
-      <span class="brand-name">Il Ricettario</span>
+      <span class="brand-name">{{ i18n.t().shell.brand }}</span>
     </a>
-    <nav class="main-nav" aria-label="Navigazione principale">
-      <a routerLink="/ricette" routerLinkActive="active">Ricette</a>
-      <a routerLink="/preferiti" routerLinkActive="active">Preferiti ({{ recipeService.favoritesCount() }})</a>
-      <a routerLink="/chi-siamo" routerLinkActive="active">Chi siamo</a>
+    <nav class="main-nav" [attr.aria-label]="i18n.t().shell.navAriaLabel">
+      <a routerLink="/ricette" routerLinkActive="active">{{ i18n.t().shell.navRecipes }}</a>
+      <a routerLink="/preferiti" routerLinkActive="active">{{ i18n.t().shell.navFavorites }} ({{ recipeService.favoritesCount() }})</a>
+      <a routerLink="/chi-siamo" routerLinkActive="active">{{ i18n.t().shell.navAbout }}</a>
     </nav>
+    <div class="lang-switch" role="group" aria-label="Language / Lingua">
+      @for (lang of languages; track lang.value) {
+        <button
+          type="button"
+          class="lang-button"
+          [class.active]="i18n.language() === lang.value"
+          [attr.aria-pressed]="i18n.language() === lang.value"
+          (click)="i18n.setLanguage(lang.value)"
+        >
+          {{ lang.label }}
+        </button>
+      }
+    </div>
   </div>
 </header>
 
@@ -18,7 +31,7 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© {{ year }} Il Ricettario. Tutti i diritti riservati.</p>
-    <p>Ricette della tradizione italiana, spiegate passo dopo passo.</p>
+    <p>© {{ year }} {{ i18n.t().shell.copyright }}</p>
+    <p>{{ i18n.t().shell.tagline }}</p>
   </div>
 </footer>

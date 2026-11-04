@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { I18nService } from '../../i18n/i18n.service';
 
 @Component({
   selector: 'app-not-found',
   imports: [RouterLink],
   templateUrl: './not-found.html',
 })
-export class NotFound {}
+export class NotFound {
+  protected readonly i18n = inject(I18nService);
+}

@@ -1,5 +1,5 @@
 <div class="empty-state">
-  <h1>Pagina non trovata</h1>
-  <p>L’indirizzo che hai aperto non esiste. Torna al catalogo per continuare a sfogliare le ricette.</p>
-  <a class="button" routerLink="/ricette">Vai alle ricette</a>
+  <h1>{{ i18n.t().notFound.title }}</h1>
+  <p>{{ i18n.t().notFound.text }}</p>
+  <a class="button" routerLink="/ricette">{{ i18n.t().notFound.goToRecipes }}</a>
 </div>

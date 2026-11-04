@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CATEGORY_LABELS, DIFFICULTY_LABELS } from '../../models/recipe';
+import { I18nService } from '../../i18n/i18n.service';
 import { RecipeService } from '../../services/recipe.service';
 
 @Component({
@@ -15,9 +15,11 @@ export class RecipeDetail {
   readonly id = input<string>();
 
   private readonly recipeService = inject(RecipeService);
+  protected readonly i18n = inject(I18nService);
 
-  protected readonly categoryLabels = CATEGORY_LABELS;
-  protected readonly difficultyLabels = DIFFICULTY_LABELS;
+  /** Locale per la pipe date, aggiornato al cambio lingua. */
+  protected readonly dateLocale = computed(() => (this.i18n.language() === 'en' ? 'en-US' : 'it-IT'));
+
   protected readonly recipe = computed(() => this.recipeService.getById(this.id()));
   protected readonly isFavorite = computed(() => {
     const recipe = this.recipe();
